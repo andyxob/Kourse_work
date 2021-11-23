@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Додати лікаря
+{% endblock %}
+
+{% block content %}
+<h1>Додати лікаря</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form.name}}<br>
+        {{form.surname}}<br>
+        {{form.category}}<br>
+        <button type="submit" class="btn btn-success">Add</button>
+        <span>{{ error }}</span>
+    </form>
+{% endblock %}
+
+
