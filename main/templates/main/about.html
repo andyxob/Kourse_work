@@ -1,8 +1,8 @@
 {% extends 'main/base.html' %}
 
-{% block title %}
+{%block title%}
 Проект "Про нас"
-{% endblock %}
+{%endblock%}
 
 {% block content %}
 <h1>Довідник масажиста </h1>
@@ -11,6 +11,6 @@
   комфортного запису користувачів на прийом до лікаря <br>
   за допомогою веб-додатку</p>
 
-<a href="{% url 'main' %}">Про види масажу</a>
-<a href="{% url 'main' %}">Про лікарів</a>
+<a href="{% url 'massages'%}">Про види масажу</a>
+<a href="{% url 'doctors'%}">Про лікарів</a>
 {% endblock %}
