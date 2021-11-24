@@ -24,6 +24,8 @@ urlpatterns = [
     path('create', views.create, name = 'create'),
     path('doctors', views.doctors, name='doctors'),
     path('massages', views.massages, name='massages'),
+    path('massage_back', views.massage_back, name='massage_back'),
+    path('massage_neck', views.massage_neck, name='massage_neck'),
     url(r'^signup/$', views.signup, name='signup'),
 
 

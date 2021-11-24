@@ -19,7 +19,13 @@ def doctors(request):
     return render(request, 'main/about/doctors.html', {'title': 'Doctors', 'Doctors': doctors})
 
 def massages(request):
-    return render(request, 'main/about/massage.html',)
+    return render(request, 'main/about/massage.html')
+
+def massage_back(request):
+    return render(request, 'main/about/massages/back.html')
+
+def massage_neck(request):
+    return render(request, 'main/about/massages/neck.html')
 
 def create(request):
     error = ''
@@ -35,7 +41,7 @@ def create(request):
     context = {'form': form,
                'error': error
                }
-    return render(request, 'main/create.html', context)
+    return render(request, 'main/about/doctors.html', context)
 
 def signup(request):
     if request.method == 'POST':

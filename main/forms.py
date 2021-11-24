@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class DoctorForm(ModelForm):
     class Meta:
         model = Doctor
-        fields = ["name", "surname",'category']
+        fields = ["name", "surname",'category', 'bio']
         widgets = {"name": TextInput(attrs={
             'class': 'form-control',
             'placeholder': "Enter name"
@@ -18,7 +18,11 @@ class DoctorForm(ModelForm):
             }),
             "category": TextInput(attrs={
                 'class':'form-control',
-                'placeholder':'enter category'})}
+                'placeholder':'enter category'}),
+            "bio": Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'enter bio'}),
+        }
 
 class SignUpForm(UserCreationForm):
 
