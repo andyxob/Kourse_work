@@ -14,6 +14,13 @@ def about(request):
     return render(request, 'main/about.html')
 
 
+def doctors(request):
+    doctors = Doctor.objects.all()
+    return render(request, 'main/about/doctors.html', {'title': 'Doctors', 'Doctors': doctors})
+
+def massages(request):
+    return render(request, 'main/about/massage.html',)
+
 def create(request):
     error = ''
     if request.method =='POST':

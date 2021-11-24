@@ -22,6 +22,8 @@ urlpatterns = [
     path('', views.index,name = 'main'),
     path('about', views.about, name='about'),
     path('create', views.create, name = 'create'),
+    path('doctors', views.doctors, name='doctors'),
+    path('massages', views.massages, name='massages'),
     url(r'^signup/$', views.signup, name='signup'),
 
 
