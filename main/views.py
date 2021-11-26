@@ -79,6 +79,13 @@ class About:
     def massage_anti(request):
         return render(request, 'main/about/massages/anti-cellulite.html')
 
+def doctors(request):
+    doctors = Doctor.objects.all()
+    return render(request, 'main/about/doctors.html', {'title': 'Doctors', 'Doctors': doctors})
+
+def massages(request):
+    return render(request, 'main/about/massage.html',)
+
 def create(request):
     error = ''
     if request.method =='POST':
