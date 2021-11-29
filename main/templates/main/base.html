@@ -14,10 +14,11 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'main' %}">Запис</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'meeting' %}">Запис</a>
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'about' %}">Довідка</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'create' %}">Додати лікаря</a>
-        <a  class="me-3 py-2 text-dark text-decoration-none" href="">Register</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'login' %}">Login</a>
+        <a  class="me-3 py-2 text-dark text-decoration-none" href="{% url 'register' %}">Register</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'logout' %}">Log out</a>
       </nav>
     </div>
 

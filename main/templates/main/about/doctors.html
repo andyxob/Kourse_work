@@ -3,6 +3,21 @@
 {%block title%}Про Лікарів{%endblock%}
 
 {%block content%}
-    <h1>About</h1>
+<h1>Список лікарів</h1>
+
+{% if Doctors %}
+        {% for i in Doctors %}
+            <div class="alert alert-warning mt-2">
+                <h3>{{ i.name }} </h3>
+                <h3>{{ i.surname }} </h3>
+                <h5>{{ i.category }}</h5>
+                <p>{{i.bio}}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-warning mt-2">
+            <p>На даний момент жоден лікар тут не працює</p>
+        </div>
+    {% endif %}
 
 {%endblock%}

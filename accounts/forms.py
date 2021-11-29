@@ -7,7 +7,10 @@ User = get_user_model()
 
 class RegisterForm(forms.Form):
     username = forms.CharField()
-    email = forms.EmailField()
+    email = forms.EmailField( attrs={"class":"form-control",
+                                     "id": "email",
+                                     "placeholder": "enter email"})
+
     password1 = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(attrs={"class": "form-control",
@@ -50,7 +53,7 @@ class LoginForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
-        qs = User.objects.filter(username_iexact=username)
+        qs = User.objects.filter(username__iexact=username)
         if not qs.exist():
             raise forms.ValidationError("This is an invalid user")
         return username
