@@ -1,6 +1,7 @@
 from django.contrib.auth import logout, authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from .forms import LoginForm, RegisterForm, get_user_model
 from django import forms
 
@@ -10,9 +11,10 @@ from.models import Doctor
 non_alowed_usernames = ['abc']
 User = get_user_model()
 
-@login_required
+@login_required(login_url='login/')
 def meeting(request):
-    return render(request, 'main/meeting.html')
+    doctors = Doctor.objects.all()
+    return render(request, 'main/meeting.html', {'title':'Запис', 'Doctors':doctors})
 
 
 def index(request):
@@ -30,15 +32,19 @@ def register_view(request):
         email = form.cleaned_data.get("email")
         password1 = form.cleaned_data.get("password1")
         password2 = form.cleaned_data.get("password2")
-        try:
-            user = User.objects.create_user(username, email, password1)
-        except:
-            user = None
-        if user != None:
-            # request.user == user
-            # user is valid and active -> is_active
-            login(request, user)
-            return redirect("main")
+        if password1 == password2:
+            try:
+                user = User.objects.create_user(username, email, password1)
+            except:
+                user = None
+            if user != None:
+                # request.user == user
+                # user is valid and active -> is_active
+                login(request, user)
+                return redirect("main")
+            else:
+                request.session['registration_error'] = 1  # 1 ==True
+
         else:
             request.session['registration_error'] = 1  # 1 ==True
 

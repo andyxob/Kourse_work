@@ -3,11 +3,12 @@
 {%block title%}Види массажу{%endblock%}
 
 {%block content%}
-<h1>Massage type</h1>
-
-<a href="{%url 'massage_back'%}">Массаж спини</a>
-<a href="{%url 'anti_cellulite'%}">Антицилюлітний массаж</a>
-<a href="{%url 'massage_neck'%}">Масаж шиї</a>
-<a href="{%url 'manual_therapy'%}">Мануальна терапія</a>
+<h1>Види масажу</h1>
+<nav class="d-flex flex-column mt-2 mt-md-0 ms-md-auto">
+<a class="me-3 py-2 text-dark text-decoration-none" href="{%url 'massage_back'%}">Массаж спини</a>
+<a class="me-3 py-2 text-dark text-decoration-none" href="{%url 'anti_cellulite'%}">Антицилюлітний массаж</a>
+<a class="me-3 py-2 text-dark text-decoration-none" href="{%url 'massage_neck'%}">Масаж шиї</a>
+<a class="me-3 py-2 text-dark text-decoration-none" href="{%url 'manual_therapy'%}">Мануальна терапія</a>
+</nav>
 {%endblock%}
 

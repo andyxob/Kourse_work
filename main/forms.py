@@ -1,5 +1,7 @@
+from django.http import request
+
 from .models import Doctor
-from django.forms import ModelForm, TextInput, Textarea, EmailInput
+from django.forms import ModelForm, TextInput, Textarea, EmailInput, ChoiceField
 
 from django.contrib.auth import get_user_model
 from django import forms
@@ -59,7 +61,6 @@ class LoginForm(forms.Form):
         if not qs.exists():
             raise forms.ValidationError("This is an invalid user")
         return username
-
 
 
 # class DoctorForm(ModelForm):

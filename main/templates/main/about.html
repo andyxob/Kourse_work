@@ -6,11 +6,12 @@
 
 {% block content %}
 <h1>Довідник масажиста </h1>
-  <p>Даний проект було розроблено із ціллю <br>
+  <h5>Даний проект було розроблено із ціллю <br>
   полегшення складання графіку масажистам та <br>
   комфортного запису користувачів на прийом до лікаря <br>
-  за допомогою веб-додатку</p>
-
-<a href="{% url 'massages'%}">Про види масажу</a>
-<a href="{% url 'doctors'%}">Про лікарів</a>
+  за допомогою веб-додатку</h5>
+<nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+  <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'massages'%}">Про види масажу</a>
+  <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'doctors'%}">Про лікарів</a>
+</nav>
 {% endblock %}
