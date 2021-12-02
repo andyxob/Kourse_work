@@ -18,7 +18,10 @@ def meeting(request):
     doctors = Doctor.objects.all()
     form = MeetingForm(request.POST or None)
     username =  request.user.username
-    return render(request, 'main/meeting.html', {'title':'Запис', 'Doctors':doctors, 'username':username})
+    return render(request, 'main/meeting.html', {'title':'Запис',
+                                                 'Doctors':doctors,
+                                                 'username':username,
+                                                 'form':form})
 
 
 @login_required(login_url='login/')

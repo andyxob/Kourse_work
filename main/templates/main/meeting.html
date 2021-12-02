@@ -23,6 +23,12 @@
     {% endif %}
 
 <form method="post">
-    <h1>{{username}} </h1>
+    {%csrf_token%}
+    <h3>Користувач: {{username}} </h3>
+    <h3>Лікар: {{form.doctor}}</h3>
+    <h3>Дата: {{form.date}}</h3>
+    <h3>Час: {{form.time}}</h3>
+
+    <!--<button type="submit" class="btn btn-success">Записатись</button>-->
 </form>
 {%endblock%}

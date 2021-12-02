@@ -10,6 +10,8 @@ from django import forms
 non_alowed_usernames = ['abc']
 User = get_user_model()
 
+
+
 class RegisterForm(forms.Form):
     username = forms.CharField(
         widget=TextInput(attrs={"class": "form-control",
@@ -64,7 +66,9 @@ class LoginForm(forms.Form):
 
 
 class MeetingForm(forms.Form):
-    doctor = ChoiceField(widget= forms.ChoiceField())
+    doctor = forms.ModelChoiceField(queryset=Doctor.objects.all())
+    date = forms.DateTimeField(widget= forms.SelectDateWidget)
+    time = forms.TimeField()
 
     class Meta:
         model = Result
