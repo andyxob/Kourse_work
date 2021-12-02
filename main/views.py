@@ -2,7 +2,9 @@ from django.contrib.auth import logout, authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from .forms import LoginForm, RegisterForm, get_user_model
+from django.template.defaulttags import firstof
+
+from .forms import LoginForm, RegisterForm, get_user_model, MeetingForm
 from django import forms
 
 from.models import Doctor
@@ -14,8 +16,15 @@ User = get_user_model()
 @login_required(login_url='login/')
 def meeting(request):
     doctors = Doctor.objects.all()
-    return render(request, 'main/meeting.html', {'title':'Запис', 'Doctors':doctors})
+    form = MeetingForm(request.POST or None)
+    username =  request.user.username
+    return render(request, 'main/meeting.html', {'title':'Запис', 'Doctors':doctors, 'username':username})
 
+
+@login_required(login_url='login/')
+def profile(request):
+    username = request.user.username
+    return render(request, 'accounts/profile.html', {'username':username})
 
 def index(request):
     doctors = Doctor.objects.all()
@@ -41,7 +50,7 @@ def register_view(request):
                 # request.user == user
                 # user is valid and active -> is_active
                 login(request, user)
-                return redirect("main")
+                return redirect("profile")
             else:
                 request.session['registration_error'] = 1  # 1 ==True
 
@@ -60,7 +69,7 @@ def login_view(request):
             # request.user == user
             # user is valid and active -> is_active
             login(request, user)
-            return redirect("main")
+            return redirect("profile")
         else:
 
             request.session['invalid_user'] = 1  # 1 ==True

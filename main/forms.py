@@ -1,6 +1,6 @@
 from django.http import request
 
-from .models import Doctor
+from .models import Doctor, Result
 from django.forms import ModelForm, TextInput, Textarea, EmailInput, ChoiceField
 
 from django.contrib.auth import get_user_model
@@ -61,6 +61,13 @@ class LoginForm(forms.Form):
         if not qs.exists():
             raise forms.ValidationError("This is an invalid user")
         return username
+
+
+class MeetingForm(forms.Form):
+    doctor = ChoiceField(widget= forms.ChoiceField())
+
+    class Meta:
+        model = Result
 
 
 # class DoctorForm(ModelForm):
