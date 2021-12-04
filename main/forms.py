@@ -65,13 +65,30 @@ class LoginForm(forms.Form):
         return username
 
 
-class MeetingForm(forms.Form):
+class MeetingForm(forms.ModelForm):
+    time = (("1", "10:00"),
+               ("2", "11:00"),
+               ("3", "12:00"),
+               ("4", "13:00"),
+               ("5", "14:00"),
+               ("6", "15:00"),
+               ("7", "16:00"),
+               ("8", "17:00"),
+               ("9", "18:00"))
+
+    massage = (("1","Масаж спини"),
+               ("2","Масаж шиї"),
+               ("3","Мануальна терапія"),
+               ("4","Антицилюлітний масаж"))
+
     doctor = forms.ModelChoiceField(queryset=Doctor.objects.all())
     date = forms.DateTimeField(widget= forms.SelectDateWidget)
-    time = forms.TimeField()
+    time = forms.ChoiceField(choices=time)
+    massage = forms.ChoiceField(choices=massage)
 
     class Meta:
         model = Result
+        fields= '__all__'
 
 
 # class DoctorForm(ModelForm):

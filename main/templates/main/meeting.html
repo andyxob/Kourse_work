@@ -2,33 +2,15 @@
 
 {%block title%}Запис до лікаря{%endblock%}
 
-
 {%block content%}
 <h1>Запис до лікаря</h1>
-<h3>Оберіть лікаря для запису</h3>
-
-{% if Doctors %}
-        {% for i in Doctors %}
-            <div class="alert alert-warning mt-2">
-                <h3>{{ i.name }} </h3>
-                <h3>{{ i.surname }} </h3>
-                <h5>{{ i.category }}</h5>
-                <p>{{i.bio}}</p>
-            </div>
-        {% endfor %}
-    {% else %}
-        <div class="alert alert-warning mt-2">
-            <p>На даний момент жоден лікар тут не працює</p>
-        </div>
-    {% endif %}
-
 <form method="post">
     {%csrf_token%}
     <h3>Користувач: {{username}} </h3>
     <h3>Лікар: {{form.doctor}}</h3>
     <h3>Дата: {{form.date}}</h3>
+    <h3>Тип массажу: {{form.massage}}</h3>
     <h3>Час: {{form.time}}</h3>
-
-    <!--<button type="submit" class="btn btn-success">Записатись</button>-->
+    <button type="submit" class="btn btn-success">Записатись</button>
 </form>
 {%endblock%}
