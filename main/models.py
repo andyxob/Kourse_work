@@ -22,6 +22,11 @@ class Doctor(models.Model):
 
 
 class Result(models.Model):
-    user = ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    doctor = ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
-    date = DateTimeField()
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
+    time = models.TextField(default=None)
+    massage = models.TextField(default=None)
+
+    class Meta:
+        verbose_name = 'Result'
+        verbose_name_plural = 'Results'
