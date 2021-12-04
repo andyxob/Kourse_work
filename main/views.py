@@ -7,7 +7,7 @@ from django.template.defaulttags import firstof
 from .forms import LoginForm, RegisterForm, get_user_model, MeetingForm
 from django import forms
 
-from.models import Doctor
+from.models import Doctor,Result
 # Create your views here.
 
 non_alowed_usernames = ['abc']
@@ -16,18 +16,24 @@ User = get_user_model()
 @login_required(login_url='login/')
 def meeting(request):
     doctors = Doctor.objects.all()
+    username = request.user.username
     form = MeetingForm(request.POST or None)
-    username =  request.user.username
+    if form.is_valid():
+
+        new_meeting = form.save()
+        return redirect('main')
     return render(request, 'main/meeting.html', {'title':'Запис',
-                                                 'Doctors':doctors,
                                                  'username':username,
                                                  'form':form})
+
+
 
 
 @login_required(login_url='login/')
 def profile(request):
     username = request.user.username
-    return render(request, 'accounts/profile.html', {'username':username})
+    results = Result.objects.all()
+    return render(request, 'accounts/profile.html', {'username':username, 'resulrs':results})
 
 def index(request):
     doctors = Doctor.objects.all()

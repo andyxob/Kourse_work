@@ -3,6 +3,7 @@ from django.contrib import admin
 #from .forms import UserAdminCreationForm, UserAdminChangeForm
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import Doctor
+from .models import Result
 
 # @admin.register(User)
 # class UserAdmin(BaseUserAdmin):
@@ -36,3 +37,4 @@ from .models import Doctor
 
 #admin.site.register(GuestEmail)
 admin.site.register(Doctor)
+admin.site.register(Result)

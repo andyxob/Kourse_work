@@ -27,6 +27,9 @@ class Result(models.Model):
     time = models.TextField(default=None)
     massage = models.TextField(default=None)
 
+    def __str__(self):
+        return self.massage
+
     class Meta:
         verbose_name = 'Result'
         verbose_name_plural = 'Results'
