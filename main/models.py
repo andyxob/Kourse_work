@@ -27,6 +27,7 @@ class Result(models.Model):
     #date = models.DateTimeField(null=True)
     time = models.TextField(default=None)
     massage = models.TextField(default=None)
+    #is_done = models.BooleanField(default=False)
 
     def __str__(self):
         return self.massage

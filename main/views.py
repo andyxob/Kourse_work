@@ -32,12 +32,12 @@ def meeting(request):
 @login_required(login_url='login/')
 def profile(request):
     username = request.user.username
-    results = Result.objects.all()
+    results = Result.objects.filter(user = username)
     return render(request, 'accounts/profile.html', {'username':username, 'Results':results})
 
 def index(request):
     doctors = Doctor.objects.all()
-    return render(request, 'main/index.html',{'title':'Main page', 'Doctors':doctors})
+    return render(request, 'main/index.html',{'title':'Main page', 'Doctors': doctors})
 
 def about(request):
     return render(request, 'main/about.html')

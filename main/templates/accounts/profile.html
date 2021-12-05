@@ -26,12 +26,14 @@
         {% block content %}
             {%if Results %}
                 {% for i in Results %}
+                    {%if Results%}
                     <div class="alert alert-success mt-2">
-                        <h3>{{i.user}}</h3>
-                        <h3>{{i.doctor}}</h3>
-                        <h3>{{i.time}}</h3>
-                        <h3>{{i.massage}}</h3>
+                        <h3> Користувач: {{i.user}}</h3>
+                        <h3> Лікар:  {{i.doctor}}</h3>
+                        <h3> Час: {{i.time}}</h3>
+                        <h3> Тип масажу: {{i.massage}}</h3>
                     </div>
+                    {%endif%}
                 {% endfor %}
             {% else %}
                 <div class="alert alert-success mt-2">
