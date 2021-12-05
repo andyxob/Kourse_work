@@ -24,8 +24,9 @@ class Doctor(models.Model):
 class Result(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
-    time = models.TextField(default=None)
-    massage = models.TextField(default=None)
+    date= models.DateTimeField(default=None, null=True)
+    time = models.TextField(default=None, null=True)
+    massage = models.TextField(default=None, null=True)
 
     def __str__(self):
         return self.massage

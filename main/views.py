@@ -33,7 +33,7 @@ def meeting(request):
 def profile(request):
     username = request.user.username
     results = Result.objects.all()
-    return render(request, 'accounts/profile.html', {'username':username, 'resulrs':results})
+    return render(request, 'accounts/profile.html', {'username':username, 'Resulrs':results})
 
 def index(request):
     doctors = Doctor.objects.all()

@@ -23,7 +23,23 @@
     <div class="container">
         <h3>Привіт, <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'profile'%}">{{username}}</a></h3>
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'logout' %}">Log out</a>
+        {%block content%}
+            {%if Result %}
+                {% for i in Results %}
+                    <div class="alert alert-success mt-2">
+                        <h3>{{i.user}}</h3>
+                        <h3>{{i.doctor}}</h3>
+                        <h3>{{i.time}}</h3>
+                        <h3>{{i.massage}}</h3>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-success mt-2">
+                    <p> На даний момент записів ще не було</p>
+                </div>
+            {% endif %}
 
+        {% endblock %}
     </div>
 </body>
 </html>
