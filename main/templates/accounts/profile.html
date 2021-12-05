@@ -23,8 +23,8 @@
     <div class="container">
         <h3>Привіт, <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'profile'%}">{{username}}</a></h3>
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'logout' %}">Log out</a>
-        {%block content%}
-            {%if Result %}
+        {% block content %}
+            {%if Results %}
                 {% for i in Results %}
                     <div class="alert alert-success mt-2">
                         <h3>{{i.user}}</h3>
