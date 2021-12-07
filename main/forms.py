@@ -1,8 +1,7 @@
+import datetime
 from django.http import request
-
 from .models import Doctor, Result
 from django.forms import ModelForm, TextInput, Textarea, EmailInput, ChoiceField
-
 from django.contrib.auth import get_user_model
 from django import forms
 #Check for unique email & username
@@ -66,29 +65,34 @@ class LoginForm(forms.Form):
 
 
 class MeetingForm(forms.ModelForm):
-    time = (("1", "10:00"),
-               ("2", "11:00"),
-               ("3", "12:00"),
-               ("4", "13:00"),
-               ("5", "14:00"),
-               ("6", "15:00"),
-               ("7", "16:00"),
-               ("8", "17:00"),
-               ("9", "18:00"))
 
-    massage = (("1","Масаж спини"),
-               ("2","Масаж шиї"),
-               ("3","Мануальна терапія"),
-               ("4","Антицилюлітний масаж"))
 
-    doctor = forms.ModelChoiceField(queryset=Doctor.objects.all())
-    date = forms.DateTimeField(widget= forms.SelectDateWidget)
-    time = forms.ChoiceField(choices=time)
-    massage = forms.ChoiceField(choices=massage)
+
+    doctor = forms.ModelChoiceField(queryset=Doctor.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
 
     class Meta:
         model = Result
-        fields= '__all__'
+        TimeToMeet = (("1", "10:00"),
+                      ("2", "11:00"),
+                      ("3", "12:00"),
+                      ("4", "13:00"),
+                      ("5", "14:00"),
+                      ("6", "15:00"),
+                      ("7", "16:00"),
+                      ("8", "17:00"),
+                      ("9", "18:00"))
+
+        MeetingMassage = (("1", "Масаж спини"),
+                          ("2", "Масаж шиї"),
+                          ("3", "Мануальна терапія"),
+                          ("4", "Антицилюлітний масаж"))
+
+        fields = '__all__'
+        widgets = { 'time': forms.Select(choices=TimeToMeet, attrs= {'class':'form-control'}),
+                   'massage': forms.Select(choices=MeetingMassage, attrs={'class':'form-control'}),
+                   'date': forms.SelectDateWidget(attrs={'class':'form-control'}),
+                   }
+
 
 
 # class DoctorForm(ModelForm):

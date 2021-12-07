@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 #from django.contrib.auth.models import User
 from django.db.models import ForeignKey
@@ -20,15 +22,15 @@ class Doctor(models.Model):
         verbose_name = 'Doctor'
         verbose_name_plural = 'Doctors'
 
-
 class Result(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
-    #date = models.DateTimeField(null=True)
-    time = models.TextField(default=None)
-    massage = models.TextField(default=None)
-    #is_done = models.BooleanField(default=False)
+    date = models.DateField( null=True)
+    time = models.TimeField(default=None, null=True)
+    massage = models.TextField(default=None, null=True)
+    is_done = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.massage
+
 

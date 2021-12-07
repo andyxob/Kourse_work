@@ -15,33 +15,19 @@ User = get_user_model()
 
 @login_required(login_url='login/')
 def meeting(request):
-    doctors = Doctor.objects.all()
     username = request.user.username
     form = MeetingForm(request.POST or None)
-    if form.is_valid():
+    if request.method == "POST":
 
-        new_meeting = form.save()
-        return redirect('main')
-    return render(request, 'main/meeting.html', {'title':'Запис',
-                                                 'username':username,
-                                                 'form':form})
-
-
-
-
-@login_required(login_url='login/')
-def profile(request):
-    username = request.user.username
-    results = Result.objects.filter(user = username)
-    return render(request, 'accounts/profile.html', {'username':username, 'Results':results})
-
-def index(request):
-    doctors = Doctor.objects.all()
-    return render(request, 'main/index.html',{'title':'Main page', 'Doctors': doctors})
-
-def about(request):
-    return render(request, 'main/about.html')
-
+        if form.is_valid():
+            try:
+                new = form.save()
+                return redirect("profile")
+            except:
+                pass
+        else:
+            form = MeetingForm()
+    return render(request, 'main/meeting.html', {'title':'Запис','username':username,'form':form})
 
 def register_view(request):
     form = RegisterForm(request.POST or None)
@@ -67,6 +53,19 @@ def register_view(request):
             request.session['registration_error'] = 1  # 1 ==True
 
     return render(request, "accounts/signup.html", {'form': form})
+
+@login_required(login_url='login/')
+def profile(request):
+    username = request.user.username
+    results = Result.objects.filter(user = request.user.id)
+    return render(request, 'accounts/profile.html', {'username':username, 'Results':results})
+
+def index(request):
+    doctors = Doctor.objects.all()
+    return render(request, 'main/index.html',{'title':'Main page', 'Doctors': doctors})
+
+def about(request):
+    return render(request, 'main/about.html')
 
 def login_view(request):
     form = LoginForm(request.POST or None)
