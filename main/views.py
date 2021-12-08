@@ -3,11 +3,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.template.defaulttags import firstof
-
 from .forms import LoginForm, RegisterForm, get_user_model, MeetingForm
 from django import forms
 
-from.models import Doctor,Result
+from.models import Doctor, Meeting
 # Create your views here.
 
 non_alowed_usernames = ['abc']
@@ -16,18 +15,17 @@ User = get_user_model()
 @login_required(login_url='login/')
 def meeting(request):
     username = request.user.username
-    form = MeetingForm(request.POST or None)
-    if request.method == "POST":
+    user = request.user.id
+    form = MeetingForm(request.POST or None,user=user)
 
-        if form.is_valid():
-            try:
-                new = form.save()
-                return redirect("profile")
-            except:
-                pass
-        else:
-            form = MeetingForm()
-    return render(request, 'main/meeting.html', {'title':'Запис','username':username,'form':form})
+    if form.is_valid():
+        try:
+            form.save()
+            return redirect('profile')
+        except: pass
+
+    return render (request, 'main/meeting.html', {'form':form, 'username':username},)
+
 
 def register_view(request):
     form = RegisterForm(request.POST or None)
@@ -57,8 +55,8 @@ def register_view(request):
 @login_required(login_url='login/')
 def profile(request):
     username = request.user.username
-    results = Result.objects.filter(user = request.user.id)
-    return render(request, 'accounts/profile.html', {'username':username, 'Results':results})
+    meetings = Meeting.objects.filter(user = request.user.id)
+    return render(request, 'accounts/profile.html', {'username':username, 'Meetings':meetings})
 
 def index(request):
     doctors = Doctor.objects.all()

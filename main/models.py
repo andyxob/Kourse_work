@@ -1,13 +1,12 @@
 import datetime
-
+from django.contrib.auth import get_user_model
+import django.utils.timezone
 from django.db import models
-#from django.contrib.auth.models import User
-from django.db.models import ForeignKey
 from django.conf import settings
 from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 # Create your models here.
-from django.forms import DateTimeField
+
 from  django.utils.timezone import now
 
 User = settings.AUTH_USER_MODEL
@@ -22,15 +21,31 @@ class Doctor(models.Model):
         verbose_name = 'Doctor'
         verbose_name_plural = 'Doctors'
 
-class Result(models.Model):
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
-    date = models.DateField( null=True)
-    time = models.TimeField(default=None, null=True)
-    massage = models.TextField(default=None, null=True)
-    is_done = models.BooleanField(default=False, null=True)
 
-    def __str__(self):
-        return self.massage
+class Meeting(models.Model):
+    TimeToMeet = (("1", "10:00"),
+                  ("2", "11:00"),
+                  ("3", "12:00"),
+                  ("4", "13:00"),
+                  ("5", "14:00"),
+                  ("6", "15:00"),
+                  ("7", "16:00"),
+                  ("8", "17:00"),
+                  ("9", "18:00"))
+
+    MeetingMassage = (("1", "Масаж спини"),
+                      ("2", "Масаж шиї"),
+                      ("3", "Мануальна терапія"),
+                      ("4", "Антицилюлітний масаж"))
+
+    user = models.ForeignKey(User, null= True, on_delete=models.SET_NULL)
+    doctor = models.ForeignKey(Doctor, null=True, on_delete=models.SET_NULL)
+    date = models.DateField(default=django.utils.timezone.now())
+    massage = models.TextField(choices=MeetingMassage, default="1")
+    time = models.TextField(choices=TimeToMeet, default="6")
+    is_done = models.BooleanField(default=False)
+
+
+
 
 

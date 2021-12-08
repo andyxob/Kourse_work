@@ -1,22 +1,16 @@
-import datetime
-from django.http import request
-from .models import Doctor, Result
-from django.forms import ModelForm, TextInput, Textarea, EmailInput, ChoiceField
+from .models import Doctor, Meeting
 from django.contrib.auth import get_user_model
 from django import forms
 #Check for unique email & username
-
 non_alowed_usernames = ['abc']
 User = get_user_model()
 
-
-
 class RegisterForm(forms.Form):
     username = forms.CharField(
-        widget=TextInput(attrs={"class": "form-control",
+        widget=forms.TextInput(attrs={"class": "form-control",
                                 "placeholder":"Enter username"}))
     email = forms.EmailField(
-        widget=EmailInput(attrs={"class":"form-control",
+        widget=forms.EmailInput(attrs={"class":"form-control",
                                  "placeholder":"Enter e-mail"}))
     password1 = forms.CharField(
         label="Password",
@@ -66,34 +60,26 @@ class LoginForm(forms.Form):
 
 class MeetingForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user") or None
+        super().__init__(*args, **kwargs)
+        self.user = user
 
-
-    doctor = forms.ModelChoiceField(queryset=Doctor.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
-
+    doctor = forms.ModelChoiceField(widget=forms.Select({'class': 'form-control'}), queryset=Doctor.objects.all())
     class Meta:
-        model = Result
-        TimeToMeet = (("1", "10:00"),
-                      ("2", "11:00"),
-                      ("3", "12:00"),
-                      ("4", "13:00"),
-                      ("5", "14:00"),
-                      ("6", "15:00"),
-                      ("7", "16:00"),
-                      ("8", "17:00"),
-                      ("9", "18:00"))
+        model = Meeting
 
-        MeetingMassage = (("1", "Масаж спини"),
-                          ("2", "Масаж шиї"),
-                          ("3", "Мануальна терапія"),
-                          ("4", "Антицилюлітний масаж"))
+        fields = ['doctor', "date", 'time', 'massage']
 
-        fields = '__all__'
-        widgets = { 'time': forms.Select(choices=TimeToMeet, attrs= {'class':'form-control'}),
-                   'massage': forms.Select(choices=MeetingMassage, attrs={'class':'form-control'}),
-                   'date': forms.SelectDateWidget(attrs={'class':'form-control'}),
-                   }
+        widgets = {
+            "date":forms.SelectDateWidget(attrs={'class':'form-control'}),
+            "time": forms.Select(attrs={'class':'form-control'}),
+            "massage":forms.Select(attrs={'class':'form-control'})
+        }
 
-
+    def clean(self, *args, **kwargs):
+        cleaned_data = super().clean(*args, **kwargs)
+        return cleaned_data
 
 # class DoctorForm(ModelForm):
 #     class Meta:

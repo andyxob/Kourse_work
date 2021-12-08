@@ -24,11 +24,12 @@
         <h3>Привіт, <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'profile'%}">{{username}}</a></h3>
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'logout' %}">Log out</a>
     {% block content %}
-        {%if Results %}
-                {% for i in Results %}
+        {%if Meetings %}
+                {% for i in Meetings %}
                     <div class="alert alert-success mt-2">
-                        <h3> Користувач: {{i.user}}</h3>
+                        <h3> Користувач: {{username}}</h3>
                         <h3> Лікар:  {{i.doctor}}</h3>
+                        <h3> Дата: {{i.date}}</h3>
                         <h3> Час: {{i.time}}</h3>
                         <h3> Тип масажу: {{i.massage}}</h3>
                     </div>
