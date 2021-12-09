@@ -30,8 +30,8 @@
                         <h3> Користувач: {{username}}</h3>
                         <h3> Лікар:  {{i.doctor}}</h3>
                         <h3> Дата: {{i.date}}</h3>
-                        <h3> Час: {{i.time}}</h3>
-                        <h3> Тип масажу: {{i.massage}}</h3>
+                        <h3> Час: {{i.get_time_display}}</h3>
+                        <h3> Тип масажу: {{i.get_massage_display}}</h3>
                     </div>
                 {% endfor %}
             {% else %}
