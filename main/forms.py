@@ -77,6 +77,12 @@ class MeetingForm(forms.ModelForm):
             "massage":forms.Select(attrs={'class':'form-control'})
         }
 
+    def Time(self):
+        return self.get_time_display()
+
+    def Massage(self):
+        return self.get_massage_display()
+
     def clean(self, *args, **kwargs):
         cleaned_data = super().clean(*args, **kwargs)
         return cleaned_data
