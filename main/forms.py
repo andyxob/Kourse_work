@@ -60,10 +60,10 @@ class LoginForm(forms.Form):
 
 class MeetingForm(forms.ModelForm):
 
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop("user") or None
-        super().__init__(*args, **kwargs)
-        self.user = user
+    # def __init__(self, *args, **kwargs):
+    #     user = kwargs.pop("user") or None
+    #     super().__init__(*args, **kwargs)
+    #     self.user = user
 
     doctor = forms.ModelChoiceField(widget=forms.Select({'class': 'form-control'}), queryset=Doctor.objects.all())
     class Meta:

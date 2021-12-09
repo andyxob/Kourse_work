@@ -45,7 +45,8 @@ class Meeting(models.Model):
     time = models.TextField(choices=TimeToMeet, default="6")
     is_done = models.BooleanField(default=False)
 
-
+    def __str__(self):
+        return self.date
 
 
 

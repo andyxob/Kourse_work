@@ -15,11 +15,12 @@ User = get_user_model()
 @login_required(login_url='login/')
 def meeting(request):
     username = request.user.username
-    user = request.user.id
-    form = MeetingForm(request.POST or None,user=user)
-
+    form = MeetingForm(request.POST or None)
     if form.is_valid():
         try:
+
+            obj = form.save(commit=False)
+            obj.user =  User.objects.get(pk=request.user.id)
             form.save()
             return redirect('profile')
         except: pass
