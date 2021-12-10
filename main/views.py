@@ -1,10 +1,7 @@
 from django.contrib.auth import logout, authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
-from django.template.defaulttags import firstof
 from .forms import LoginForm, RegisterForm, get_user_model, MeetingForm
-from django import forms
 
 from.models import Doctor, Meeting
 # Create your views here.

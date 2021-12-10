@@ -87,23 +87,5 @@ class MeetingForm(forms.ModelForm):
         cleaned_data = super().clean(*args, **kwargs)
         return cleaned_data
 
-# class DoctorForm(ModelForm):
-#     class Meta:
-#         model = Doctor
-#         fields = ["name", "surname",'category', 'bio']
-#         widgets = {"name": TextInput(attrs={
-#             'class': 'form-control',
-#             'placeholder': "Enter name"
-#         }),
-#             "surname": TextInput(attrs={
-#                 'class': 'form-control',
-#                 'placeholder': "Enter surname"
-#             }),
-#             "category": TextInput(attrs={
-#                 'class':'form-control',
-#                 'placeholder':'enter category'}),
-#             "bio": Textarea(attrs={
-#                 'class': 'form-control',
-#                 'placeholder': 'enter bio'}),
-#         }
+
 
