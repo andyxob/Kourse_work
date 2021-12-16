@@ -105,6 +105,3 @@ class About:
 
     def massage_anti(request):
         return render(request, 'main/about/massages/anti-cellulite.html')
-
-
-

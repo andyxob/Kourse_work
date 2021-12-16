@@ -22,8 +22,7 @@ class RegisterForm(forms.Form):
         label= "Confirm Password",
         widget=forms.PasswordInput(attrs={"class": "form-control",
                                           "id": "user-confirm-password",
-                                          "placeholder":"Confirm password"})
-    )
+                                          "placeholder":"Confirm password"}))
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
@@ -47,9 +46,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={"class": "form-control",
                                           "id": "user-password",
-                                          "placeholder":"Enter Password"})
-    )
-
+                                          "placeholder":"Enter Password"}))
     def clean_username(self):
         username = self.cleaned_data.get("username")
         qs = User.objects.filter(username__iexact=username)
@@ -59,12 +56,6 @@ class LoginForm(forms.Form):
 
 
 class MeetingForm(forms.ModelForm):
-
-    # def __init__(self, *args, **kwargs):
-    #     user = kwargs.pop("user") or None
-    #     super().__init__(*args, **kwargs)
-    #     self.user = user
-
     doctor = forms.ModelChoiceField(widget=forms.Select({'class': 'form-control'}), queryset=Doctor.objects.all())
     class Meta:
         model = Meeting
@@ -86,6 +77,3 @@ class MeetingForm(forms.ModelForm):
     def clean(self, *args, **kwargs):
         cleaned_data = super().clean(*args, **kwargs)
         return cleaned_data
-
-
-

@@ -1,13 +1,8 @@
-import datetime
-from django.contrib.auth import get_user_model
 import django.utils.timezone
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_save
 
 # Create your models here.
-
-from  django.utils.timezone import now
 
 User = settings.AUTH_USER_MODEL
 class Doctor(models.Model):
@@ -20,7 +15,6 @@ class Doctor(models.Model):
     class Meta:
         verbose_name = 'Doctor'
         verbose_name_plural = 'Doctors'
-
 
 class Meeting(models.Model):
     TimeToMeet = (("1", "10:00"),
@@ -47,9 +41,3 @@ class Meeting(models.Model):
 
     def __str__(self):
         return self.date
-
-
-
-
-
-
